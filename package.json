@@ -1,9 +1,9 @@
 {
-  "name": "hackathon-starter",
-  "version": "3.5.0",
+  "name": "line-up",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/AndrewHeinke/LineUp.git"
   },
   "scripts": {
     "start": "node app.js",
