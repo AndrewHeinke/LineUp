@@ -17,7 +17,8 @@
     "handlebars": "^4.0.5",
     "method-override": "^2.3.6",
     "mysql": "^2.11.1",
-    "sequelize": "^3.23.6"
+    "sequelize": "^3.23.6",
+    "sequelize-cli": "^2.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
