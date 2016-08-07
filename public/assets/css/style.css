@@ -6,3 +6,12 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+#mapxxx {
+          width: 49%;
+          height: 400px;
+          }
+#map {
+          width: 49%;
+          height: 400px;
+          }

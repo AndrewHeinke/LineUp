@@ -3,7 +3,9 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var app = express();
 
+
 app.use(express.static(process.cwd() + '/public'));
+//var mainjs = require("./public/assets/js/mainapp.js")
 
 var exphbs = require('express-handlebars');
 
