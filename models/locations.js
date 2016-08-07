@@ -2,8 +2,8 @@
 module.exports = function(sequelize, DataTypes) {
   var Locations = sequelize.define('Locations', {
     location_name: DataTypes.STRING,
-    latitude: DataTypes.FLOAT,
-    longitude: DataTypes.FLOAT
+    latitude: DataTypes.DOUBLE,
+    longitude: DataTypes.DOUBLE
   }, {
     classMethods: {
       associate: function(models) {

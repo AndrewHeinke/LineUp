@@ -1,25 +1,41 @@
 var express = require('express');
 var router = express.Router();
-var burger = require('../models/index.js');
+var models = require('../models');
 var method = require('method-override');
 var bodyParser = require('body-parser');
 
 router.get('/', function(req, res) {
-  res.render('index');
+	models.Locations.findAll()
+	.then(function(data){
+		var allLocations = {locations: data};
+		console.log(allLocations);
+		res.render('index', allLocations);
+	});
 });
 
 
 router.post('/line/newvote', function(req, res){
-	//route to post votes
-}
+	models.LineVotes.create({
+		line_length: req.body.line_length,
+		user_id: req.body.user_id,
+		location_id: req.body.location_id
+	})
+});
 
 router.post('/party/create', function(req, res){
 	//route to add party affiliation
-}
+});
 
 router.get('/location/:id', function(req, res){
 	//get for location info
-}
+})
+
+router.get('/locations', function(req, res){
+	models.Locations.findAll()
+	.then(function(locations){
+		res.json(locations);
+	});
+});
 
 
 module.exports = router;
