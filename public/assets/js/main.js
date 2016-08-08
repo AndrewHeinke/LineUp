@@ -35,11 +35,9 @@ for (var i = 0; i < mapData.length; i++) {
          for( i = 0; i < mapData.length; i++ ) {
              //trap for missing lat or lng
              if (markers[i].lat === null || markers[i].lng === null) {
-                 console.log("mapData[i].lat = "+markers[i].lat + " mapData[i].lng = " + markers[i].lng + " i = "+i)
             }
              else{
                 var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
-                console.log("position = "+ bounds);
                  bounds.extend(position);
 
                  marker = new google.maps.Marker({
@@ -47,7 +45,6 @@ for (var i = 0; i < mapData.length; i++) {
                      map: map,
                      title: markers[i].location_name
                  });
-console.log("line111");
                  markersArray.push(marker);
                  // Allow each marker to have an info window
                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -61,8 +58,7 @@ console.log("line111");
                          });
                      }
                  })(marker, i));
-console.log("line 125");
-    //             //add code to change the color desired
+                 //add code to change the color desired
                  if(i===0){
                      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
                  }
@@ -74,13 +70,11 @@ console.log("line 125");
                  }
                  // Automatically center the map fitting all markers on the screen
                  map.fitBounds(bounds);
-                         console.log("bounds = "+ bounds);
              }
          }
      });
 
     function clearMarkers(markersArray){
-        console.log("line 143");
         //passed an array with the gogle maps marker objects saved when the markers are created
         for (var i = 0; i < markersArray.length; i++) {
             markersArray[i].setMap(null);
