@@ -6,18 +6,11 @@ body {
 main {
   flex: 1 0 auto;
 }
-
-
 nav .nav-wrapper {
   padding: 0 20px;
 }
 
-#mapxxx {
-          width: 49%;
-          height: 400px;
-          }
 #map {
-          width: 49%;
-          height: 400px;
-          }
-
+  width: 100%;
+  height: 90vh;
+}

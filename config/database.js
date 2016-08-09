@@ -1,9 +1,9 @@
 module.exports = {
     'connection': {
-        'host': 'localhost',
+        'host': '127.0.0.1',
         'user': 'root',
         'password': ''
     },
-	'database': 'lineup3',
+	'database': 'lineup_1',
     'users_table': 'Users'
 };
