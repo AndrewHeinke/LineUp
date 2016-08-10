@@ -1,30 +1,8 @@
-
-
 // app/routes.js
 module.exports = function(app, passport) {
 
-	// =====================================
-	// HOME PAGE (with login links) ========
-	// =====================================
 	app.get('/', function(req, res) {
 		res.render('index');
-	});
-
-	// =====================================
-	// LOGIN ===============================
-	// =====================================
-
-	app.get('/mainLogin', function(req, res) {
-
-		// render the page and pass in any flash data if it exists
-		res.render('mainLogin.handlebars', { message: req.flash('loginMessage') });
-	});
-
-	// show the login form
-	app.get('/login', function(req, res) {
-
-		// render the page and pass in any flash data if it exists
-		res.render('login.handlebars', { message: req.flash('loginMessage') });
 	});
 
 	// process the login form
@@ -35,7 +13,6 @@ module.exports = function(app, passport) {
 		}),
         function(req, res) {
             console.log("hello");
-
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
@@ -43,15 +20,6 @@ module.exports = function(app, passport) {
             }
         res.redirect('/');
     });
-
-	// =====================================
-	// SIGNUP ==============================
-	// =====================================
-	// show the signup form
-	app.get('/signup', function(req, res) {
-		// render the page and pass in any flash data if it exists
-		res.render('signup', { message: req.flash('signupMessage') });
-	});
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
