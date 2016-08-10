@@ -6,11 +6,16 @@ $.get(currentURL + "/locations", function(mapData){
 
     var map;
     var bounds = new google.maps.LatLngBounds();
+    //30.298063, -97.785785 middle of lake austin
     var markersArray = [];
 
     // Display a map on the page
-    map = new google.maps.Map(document.getElementById("map"));
-    map.setTilt(45);
+    map = new google.maps.Map(document.getElementById("map")//, {
+         // center: {lat: 30.298063, lng: -97.785785},
+         // zoom: 6
+        //}
+        );
+    //map.setTilt(45);
 
 var markers = [];
 for (var i = 0; i < mapData.length; i++) {
@@ -24,12 +29,62 @@ for (var i = 0; i < mapData.length; i++) {
 //     console.log("markers[ " +i+" ].lng = " + markers[i].lng);
 //     console.log("typeOf lat = " + typeof markers[i].lat)
 // }
+//geolocation//
+var currentLat = 0;
+var currentLng = 0;
+var gotCurrentLocation = false;
+var curPos = {};
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+                currentLat = position.coords.latitude;
+                currentLng = position.coords.longitud;
+                console.log("position.coords.latitude = "+ position.coords.latitude + "typeof "+ (typeof currentLat));
+
+                console.log("position.coords.longitude = "+ position.coords.longitude)
+                var curPos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                    };
+gotCurrentLocation = true;
+                //infoWindow.setPosition(pos);
+                //infoWindow.setContent('Location found.');
+                //map.setCenter(pos);
+                //
+            var curMarker = new google.maps.Marker({
+                     position: curPos,
+                     map: map,
+                     title: "current location",
+                     icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 2
+                            }
+                 });
+                //
+            }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+            console.log("handleLocationError(true");
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+          console.log("handleLocationError(false,");
+        }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+//end geolocation//
 
      //just incase there are markers already on the map
         //clear markers
         clearMarkers(markersArray);
         // Display multiple markers on a map
-         var infoWindow = new google.maps.InfoWindow(), marker, i;
+         var infoWindow = new google.maps.InfoWindow();
+         var marker;
+         var i;
 
      // Loop through our array of markers & place each one on the map
          for( i = 0; i < mapData.length; i++ ) {
@@ -39,15 +94,26 @@ for (var i = 0; i < mapData.length; i++) {
              else{
                 var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
                  bounds.extend(position);
-
-                 marker = new google.maps.Marker({
-                     position: position,
-                     map: map,
-                     title: markers[i].location_name
-                 });
+                // if (i === 0) {
+                //     marker = new google.maps.Marker({
+                //      position: position,
+                //      map: map,
+                //      title: markers[i].location_name,
+                //      icon: {
+                //         path: google.maps.SymbolPath.CIRCLE,
+                //         scale: 10
+                //             }
+                //  });
+                // } else {
+                     marker = new google.maps.Marker({
+                         position: position,
+                         map: map,
+                         title: markers[i].location_name
+                     });
+               // }
                  markersArray.push(marker);
                  // Allow each marker to have an info window
-                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                 google.maps.event.addListener(marker, 'click', function(marker, i) {
                  return function() {
                          //infoWindow.setContent(infoWindowContent[i][0]);
                          infoWindow.setContent('<div class="info_content">' +
@@ -57,7 +123,7 @@ for (var i = 0; i < mapData.length; i++) {
                              infoWindow.open(map, marker);
                          });
                      }
-                 })(marker, i));
+                 });
                  //add code to change the color desired
                  if(i===0){
                      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
@@ -82,4 +148,8 @@ for (var i = 0; i < mapData.length; i++) {
         markersArray = [];
         bounds = new google.maps.LatLngBounds();
      }
+$( window ).resize(function() {
+    console.log("resize ran");
+  map.fitBounds(bounds);
+});
 });
