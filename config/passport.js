@@ -1,4 +1,7 @@
 // load all the things we need
+var models = require('../app/models');
+
+console.log(models);
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
@@ -16,13 +19,20 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user.email);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
-            done(err, rows[0]);
+        // connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
+        //     done(err, rows[0]);
+        // });
+        models.Users.findAll({
+            where: {
+                email: id
+            }
+        }).then(function(rows){
+            done(null, rows[0]);
         });
     });
 
@@ -43,24 +53,22 @@ module.exports = function(passport) {
         function(req, username, password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
-                if (err)
-                    return done(err);
+            models.Users.findAll({
+                where: {
+                    email: username
+                }
+            })
+            .then(function(rows){
                 if (rows.length) {
                     return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                 } else {
                     // if there is no user with that username
                     // create the user
                     var newUserMysql = {
-                        username: username,
+                        email: username,
                         password: bcrypt.hashSync(password, null, null)  // use the generateHash function in our user model
                     };
-
-                    var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
-
-                    connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
-                        newUserMysql.id = rows.insertId;
-
+                    models.Users.create(newUserMysql).then(function(rows){
                         return done(null, newUserMysql);
                     });
                 }
@@ -83,9 +91,11 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) { // callback with email and password from our form
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
-                if (err)
-                    return done(err);
+           models.Users.findAll({
+                where: {
+                    email: username
+                }
+            }).then(function(rows){
                 if (!rows.length) {
                     return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
                 }

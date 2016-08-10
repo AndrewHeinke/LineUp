@@ -8,34 +8,81 @@
 	<script src="https://use.fontawesome.com/977cfe96bb.js"></script>
 	<title>LineUp</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsWjdQWtX5MKGkDptD2flvRjdvusfUNio"></script> -->
-<!--     <style type="text/css">
-       #mapxxx {
-                  width: 49%;
-                  height: 400px;
-                  }
-      #map {
-                  width: 49%;
-                  height: 400px;
-                  }
-   </style> -->
 </head>
 <body>
 	<nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">LineUp</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="/mainLogin" class="btn btn-default"><span class="fa fa-user"></span> Login</a></li>
+      <a href="/" class="brand-logo left">LineUp</a>
+      <ul id="nav-mobile" class="right">
+				<li><a href="#firstModalScreen" id="loginBtn" class="btn btn-default modal-trigger"><span class="fa fa-user"></span> Login</a></li>
       </ul>
     </div>
   </nav>
 	{{{ body }}}
+
+	<div id="firstModalScreen" class="modal">
+    <div class="modal-content">
+			<h4>Login or Sign Up:</h4>
+			<a href="#loginModal" class="btn btn-default modal-action modal-close modal-trigger"><span class="fa fa-user"></span> Local Login</a>
+			<a href="#signUpModal" class="btn btn-default modal-action modal-close modal-trigger"><span class="fa fa-user"></span> Local Signup</a>
+    </div>
+  </div>
+
+	<!-- Login In Modal Pop Up -->
+	<div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h4><span class="fa fa-sign-in"></span> User Login</h4>
+			<form action="/login" method="post">
+					<div class="form-group">
+							<input type="text" class="form-control" name="email">
+							<label for="email" data-error="wrong" data-success="right">Email</label>
+					</div>
+					<div class="form-group">
+							<input type="password" class="form-control" name="password">
+							<label>Password</label>
+					</div>
+					<div class="form-group">
+							<input type="checkbox" id="remember1" class="filled-in" name="remember" value="yes">
+							<label for="remember1">Remember Me</label>
+					</div>
+
+					<button type="submit" class="btn btn-warning btn-lg">Login</button>
+			</form>
+    </div>
+    <div class="modal-footer">
+			<p>Need an account? <a href="#signUpModal" class="modal-trigger modal-action modal-close">Signup</a> | Or go <a href="/">home</a>.</p>
+
+    </div>
+  </div>
+
+	<!-- Sign Up Modal -->
+	<div id="signUpModal" class="modal">
+    <div class="modal-content">
+      <h4><span class="fa fa-sign-in"></span> Signup</h4>
+			<form action="/signup" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="email">
+					<label for="email" data-error="wrong" data-success="right">Email</label>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="password">
+					<label>Password</label>
+				</div>
+				<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+			</form>
+    </div>
+    <div class="modal-footer">
+			<p>Already have an account? <a href="#loginModal" class="modal-trigger modal-action modal-close">Login</a> | Or go <a href="/">home</a>.</p>
+    </div>
+  </div>
+
   <!-- <div id="mapxxx"></div> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <!-- add this line mlh-->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsWjdQWtX5MKGkDptD2flvRjdvusfUNio"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script src="/assets/js/login.js"></script>
   <!-- end add -->
   <script >
 
