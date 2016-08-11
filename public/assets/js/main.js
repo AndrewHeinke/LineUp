@@ -1,4 +1,3 @@
- //var mapobj = require("./mapobj.js")
  $(document).ready(function() {
 
 var currentURL = window.location.origin;
@@ -82,7 +81,7 @@ $.get(currentURL + "/locations", function(mapData){
           //infoWindow.setContent(infoWindowContent[i][0]);
           infoWindow.setContent('<div class="info_content">' +
           //'<p><a href="'+mapData[i].url+'" target="_blank">' + mapData[i].location_name + '</a></p>'+
-          'We need to put something meaningful here!!!</div>');
+          i +': We need to put something meaningful here!!!</div>');
           marker.addListener('click', function() {
             infoWindow.open(map, marker);
           });
@@ -90,7 +89,10 @@ $.get(currentURL + "/locations", function(mapData){
       })(marker, i));
       //add code to change the color desired
       console.log("mapData["+i+"].line_length = "+mapData[i].line_length +" -- "+mapData[i].location_name)
-      if(mapData[i].line_length < 2){
+      if( mapData[i].line_length === null ){
+        //out of time frame line is gray
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+      } else if(mapData[i].line_length < 2){
         //short line is green
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
       } else if(mapData[i].line_length === 2){
