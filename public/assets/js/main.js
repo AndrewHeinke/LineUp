@@ -28,9 +28,9 @@ function getGeoLocation(map, callback){
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-      console.log("xxx curPos.lat = "+ curPos.lat );
-      console.log("curPos.lng = "+ curPos.lng);
-      console.log(callback);
+      //console.log("xxx curPos.lat = "+ curPos.lat );
+      //console.log("curPos.lng = "+ curPos.lng);
+      //console.log(callback);
       callback();
       gotCurrentLocation = true;
       curMarker = new google.maps.Marker({
@@ -106,7 +106,7 @@ getGeoLocation(map, function(){
         })(marker, i));
 
         //add code to change the color desired
-        console.log("mapData["+i+"].line_length = "+mapData[i].line_length +" -- "+mapData[i].location_name)
+        //console.log("mapData["+i+"].line_length = "+mapData[i].line_length +" -- "+mapData[i].location_name)
         if( mapData[i].line_length === null ){
           //out of time frame line is gray
           marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
@@ -124,45 +124,19 @@ getGeoLocation(map, function(){
       map.fitBounds(bounds);
       }
     //geofences
-    var epochCoords = [
-        {lat: 30.359470, lng: -97.734654},
-        {lat: 30.359314, lng: -97.734728},
-        {lat: 30.359157, lng: -97.734451},
-        {lat: 30.359436, lng: -97.734286}
+    var fenceCoords = [
+        {lat: mapData[i].latitude + 0.00015, lng: mapData[i].longitude + 0.00015},
+        {lat: mapData[i].latitude - 0.00015, lng: mapData[i].longitude + 0.00015},
+        {lat: mapData[i].latitude - 0.00015, lng: mapData[i].longitude - 0.00015},
+        {lat: mapData[i].latitude + 0.00015, lng: mapData[i].longitude - 0.00015}
       ];
-    var homeCoords = [
-        {lat: 29.836809, lng: -97.763282},
-{lat: 29.835598, lng: -97.765219},
-{lat: 29.833923, lng: -97.763717},
-{lat: 29.835328, lng: -97.761550}
-      ];
+
       //var thisPlace = [];
-      console.log("curPos.lat = "+curPos.lat);
+      //console.log("curPos.lat = "+curPos.lat);
       var thisPlace = new google.maps.LatLng(curPos.lat, curPos.lng);
-      //var thisFence = [];
-      // thisFence.push( new google.maps.Polygon({
-      //   paths: epochCoords,
-      //   strokeColor: '#FF0000',
-      //   strokeOpacity: 0.8,
-      //   strokeWeight: 2,
-      //   fillColor: '#FF0000',
-      //   fillOpacity: 0.35,
-      //   map: map
-      //   });
-      //);
-      // thisFence.push( new google.maps.Circle({
-      //       strokeColor: '#FF0000',
-      //       strokeOpacity: 0.8,
-      //       strokeWeight: 2,
-      //       fillColor: '#FF0000',
-      //       fillOpacity: 0.35,
-      //       map: map,
-      //       center: {lat: mapData[i].latitude,  lng: mapData[i].longitude},
-      //       radius:  50
-      //     })
-      // );
+
       var thisFence = new google.maps.Polygon({
-        paths: epochCoords,
+        paths: fenceCoords,
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
         strokeWeight: 2,
@@ -171,42 +145,17 @@ getGeoLocation(map, function(){
         map: map
         });
 
-var thisOtherFence = new google.maps.Polygon({
-        paths: homeCoords,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        map: map
-        });
-      //var resultContains = google.maps.geometry.poly.containsLocation(thisPlace[i], thisFence[i]);
-      console.log("thisPlace = "+ thisPlace );
-      console.log("thisFence = "+ thisFence);
-      if (i === 4) {
-        var resultContains = google.maps.geometry.poly.containsLocation(thisPlace, thisOtherFence);
+      // console.log("thisPlace = "+ thisPlace );
+      // console.log("thisFence = "+ thisFence);
+      var resultContains = google.maps.geometry.poly.containsLocation(thisPlace, thisFence);
+      if (resultContains) {
+        console.log("You are close enough to "+ mapData[i].location_name + " to enter line length data");
       } else{
-        var resultContains = google.maps.geometry.poly.containsLocation(thisPlace, thisFence);
+        console.log("You are not close enough to "+ mapData[i].location_name + " to enter line length data");
       }
 
-      console.log("resultContains = "+resultContains);
-//circles
-        //for (var city in citymap) {
-          // Add the circle for this city to the map.
-          // var cityCircle = new google.maps.Circle({
-          //   strokeColor: '#FF0000',
-          //   strokeOpacity: 0.8,
-          //   strokeWeight: 2,
-          //   fillColor: '#FF0000',
-          //   fillOpacity: 0.35,
-          //   map: map,
-          //   center: {lat: markers[i].lat,  lng: markers[i].lng},
-          //   radius:  50
-          // });
+      //console.log("resultContains = "+resultContains);
 
-
-
-//end circles
     //end geofences
       }
 
