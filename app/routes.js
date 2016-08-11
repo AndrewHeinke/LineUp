@@ -25,34 +25,49 @@ module.exports = function(app, passport) {
     //route to add party affiliation
   });
 
-  app.get('/location/:id', function(req, res) {
-    //get for location info
+  app.get('/location/:id/:length', function(req, res) {
+    models.Locations.findAll({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(data){
+      data[0].dataValues.line_length = req.params.length;
+      var loc = {
+        location: data[0].dataValues
+      }
+      console.log(loc);
+      res.render('indlocation', loc);
+    })
   });
 
   app.get('/locations', function(req, res) {
     var locFinal = [];
     models.Locations.findAll()
       .then(function(data) {
+        var currTime = new Date();
+        currTime.setHours(currTime.getHours() - 6);
         for (i = 0; i < data.length; i++) {
-          locFinal.push(grabVotes(data[i].dataValues));
+          locFinal.push(grabVotes(data[i].dataValues, currTime));
         }
         q.all(locFinal).then(function(locations) {
           res.json(locations);
         });
       });
 
-    var grabVotes = function(location) {
+    var grabVotes = function(location, date) {
       return models.LineVotes.findAll({
         where: {
-          location_id: location.id
+          location_id: location.id,
+          createdAt:{
+            $gte: date
+          }
         }
       }).then(function(votes) {
-        //console.log(location);
         var sum = 0;
         for (j = 0; j < votes.length; j++) {
           sum += votes[j].line_length;
         }
-        //console.log(sum);
         location.line_length = Math.round(sum / votes.length);
         console.log(location);
         return location;
