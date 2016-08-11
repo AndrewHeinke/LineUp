@@ -20,7 +20,7 @@ $(document).ready(function() {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-      console.log("curPos.lat = "+ curPos.lat );
+      console.log("xxx curPos.lat = "+ curPos.lat );
       console.log("curPos.lng = "+ curPos.lng);
       gotCurrentLocation = true;
       curMarker = new google.maps.Marker({
@@ -107,13 +107,47 @@ $(document).ready(function() {
       map.fitBounds(bounds);
       }
     //geofences
+    // var epochCoords = [
+    //     {lat: 30.359470, lng: -97.734654},
+    //     {lat: 30.359314, lng: -97.734728},
+    //     {lat: 30.359157, lng: -97.734451},
+    //     {lat: 30.359436, lng: -97.734286}
+    //   ];
     var epochCoords = [
-        {lat: 30.359470, lng: -97.734654},
-        {lat: 30.359314, lng: -97.734728},
-        {lat: 30.359157, lng: -97.734451},
-        {lat: 30.359436, lng: -97.734286}
+        {lat: 29.836809, lng: -97.763282},
+{lat: 29.835598, lng: -97.765219},
+{lat: 29.833923, lng: -97.763717},
+{lat: 29.835328, lng: -97.761550}
       ];
+      var thisPlace = new google.maps.LatLng(curPos.lat, curPos.lng);
+      var epochFence = new google.maps.Polygon({
+        paths: epochCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map
+      });
+      var resultContains = google.maps.geometry.poly.containsLocation(thisPlace, epochFence);
+      console.log("resultContains = "+resultContains);
+//circles
+        //for (var city in citymap) {
+          // Add the circle for this city to the map.
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: {lat: markers[i].lat,  lng: markers[i].lng},
+            radius:  50
+          });
 
+
+
+//end circles
     //end geofences
     }
   });
