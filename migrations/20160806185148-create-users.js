@@ -11,11 +11,12 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      name: {
+      password: {
         type: Sequelize.STRING
       },
       hasVoted: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,

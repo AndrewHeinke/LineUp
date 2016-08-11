@@ -7,9 +7,63 @@ main {
   flex: 1 0 auto;
 }
 nav .nav-wrapper {
+  padding: 0;
+}
+
+nav .brand-logo {
   padding: 0 20px;
+}
+
+#nav-mobile {
+  background: #00e676;
+}
+
+#nav-mobile:hover {
+  background: #2bbbad;
+}
+
+#loginBtn {
+  box-shadow: none;
+  font-size: 1.5em;
+  display: block;
+  list-style-type: disc;
+  line-height: 64px;
+  float: right !important;
+  padding: 0 20px;
+  height: 100%;
+  border-radius: 0px;
+  list-style-type: none;
 }
 #map {
   width: 100%;
   height: 90vh;
+}
+
+.btn {
+  background: #00e676;
+}
+
+nav ul a.btn {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.btn-large {
+  font-size: 1.5em;
+  margin: 5px 10px;
+}
+
+label {
+  font-size: 1.25em;
+}
+
+input[type=text], input[type=password] {
+  margin: 0 0 5px 0;
+}
+
+.formSubmit {
+  margin: 10px 0px;
+}
+.btn:hover, .btn-large:hover {
+
 }
