@@ -17,6 +17,12 @@ module.exports = {
         latitude: 30.248623,
         longitude: -97.762353
 
+      },
+    {
+        location_name: 'Epoch',
+        latitude: 30.362217,
+        longitude: -97.736252
+
       }], {});
   },
 

@@ -31,7 +31,7 @@ module.exports = {
         line_length: 1,
         user_id: 'dude@fakemail.com',
         location_id: 2
-    }, 
+    },
     {
         line_length: 1,
         user_id: 'wes@nomail.com',
@@ -56,9 +56,21 @@ module.exports = {
         line_length: 2,
         user_id: 'jeff@whatmail.com',
         location_id: 3
-    
-
-        
+      },
+    {
+        line_length: 1,
+        user_id: 'dog1@yesmail.com',
+        location_id: 4
+      },
+    {
+        line_length: 1,
+        user_id: 'dog2@yesmail.com',
+        location_id: 4
+      },
+    {
+        line_length: 1,
+        user_id: 'dog3@yesmail.com',
+        location_id: 4
       }], {});
   },
 
