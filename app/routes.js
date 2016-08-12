@@ -2,15 +2,8 @@
 module.exports = function(app, passport) {
 	var q = require('q');
 	var models = require('./models');
-  app.get('/', function(req, res) {
-    models.Locations.findAll()
-      .then(function(data) {
-        var allLocations = {
-          locations: data
-        };
-        console.log(allLocations);
-        res.render('index', allLocations);
-      });
+	app.get('/', function(req, res) {
+    res.render('index');
   });
 
   app.post('/line/newvote', function(req, res) {
@@ -35,10 +28,10 @@ module.exports = function(app, passport) {
       data[0].dataValues.line_length = req.params.length;
       var loc = {
         location: data[0].dataValues
-      }
+      };
       console.log(loc);
       res.render('indlocation', loc);
-    })
+    });
   });
 
   app.get('/locations', function(req, res) {
@@ -78,8 +71,8 @@ module.exports = function(app, passport) {
   // new stuff from master is above this line
 
   // process the login form
-  app.post('/login', passport.authenticate('local-login', {
-      successRedirect: '/profile', // redirect to the secure profile section
+	app.post('/login', passport.authenticate('local-login', {
+      successRedirect: '/', // redirect to the secure profile section
       failureRedirect: '/login', // redirect back to the signup page if there is an error
       failureFlash: true // allow flash messages
     }),

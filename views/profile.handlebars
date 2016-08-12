@@ -1,28 +1,22 @@
 <div class="container">
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+      <!-- <a href="/logout" class="btn btn-default btn-sm">Logout</a> -->
     <div class="row">
-        <!-- LOCAL INFORMATION -->
-        <div class="col s6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <p>
-                  <strong>id</strong>:
-                    {{user.id}}
-                        <br>
-                        <strong>Email</strong>:
-                        {{user.email}}
-                            <br>
-                            <strong>password</strong>:
-                            {{user.password}}
-                </p>
-
-            </div>
-        </div>
-
+      <div class="col s12">
+        <h2 class="flow-text center-align">Welcome to LineUp, thank you for signing up.</h2>
+        <p class="flow-text">
+          Waiting in line to vote is so 2012, LineUp shows you the voting locations with the shortest lines.
+        </p>
+        <ul class="collection with-header">
+        <li class="collection-header"><h3>How to Use LineUp</h3></li>
+        <li class="collection-item">View the map, see nearby voting locations</li>
+        <li class="collection-item">Pins are color-coded, Green (short), Yellow (medium), Red (long)</li>
+        <li class="collection-item">Click a pin and view the location details</li>
+        <li class="collection-item">Get up and go vote!</li>
+        <li class="collection-item">When you arrive at your voting location, let us know how long the line is.</li>
+      </ul>
+      <div class="center-align">
+        <a href="/" class="btn btn-large waves-effect waves-light">Get Started</a>
+      </div>
+      </div>
     </div>
-
 </div>

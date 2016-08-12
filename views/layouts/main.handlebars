@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script src="https://use.fontawesome.com/977cfe96bb.js"></script>
-	    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> -->
 	<title>LineUp</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsWjdQWtX5MKGkDptD2flvRjdvusfUNio&libraries=geometry"></script>
@@ -17,7 +16,11 @@
 	<nav class="blue-grey darken-4">
 		<div class="nav-wrapper">
 			<a href="/" class="brand-logo left">LineUp</a>
-			<a href="#firstModalScreen" id="loginBtn" class="btn btn-default modal-trigger waves-effect waves-light"><span class="fa fa-lock"></span> Login</a>
+			{{#if login}}
+				<a href="/logout" id="logoutBtn" class="btn btn-default btn-sm">Logout</a>
+			{{else}}
+				<a href="#firstModalScreen" id="loginBtn" class="btn btn-default modal-trigger waves-effect waves-light"><span class="fa fa-lock"></span> Login</a>
+			{{/if}}
 		</div>
 	</nav>
 	{{{ body }}}
