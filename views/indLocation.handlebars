@@ -1,78 +1,36 @@
 <div class="container">
   <div class="row">
-    <!-- <div class="col s12 m4">
-      <script id="locationImg" type="text/x-handlebars-template">
-          <img class="materialboxed" width="300" src="http://lorempixel.com/output/technics-q-c-640-480-7.jpg" data-caption="Location Image">
-      </script>
-        <img class="materialboxed" width="100%" src="http://lorempixel.com/output/technics-q-c-640-480-7.jpg" data-caption="Location Image">
-    </div>
-        <div class="col s12 m8">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div> -->
-        <div class="col s12">
+    <div class="col s12">
      <div class="card-panel grey lighten-5 z-depth-1">
        <div class="row">
          <div class="col s12 m4">
            <img src="http://lorempixel.com/output/technics-q-c-640-480-7.jpg" alt="" class="responsive-img">
          </div>
          <div class="col s12 m8">
-           <h3>Location Title</h2>
+           <h3>{{location-title}}</h2>
              <hr>
-           <h5>Line Length: </h5>
+           <h5>Line Length: {{line-length}}</h5>
            <div class="action-buttons">
              <a class="waves-effect waves-light btn">Directions</a>
-             <a class="waves-effect waves-light btn">button</a>
            </div>
          </div>
        </div>
      </div>
    </div>
   </div>
-
 </div>
-
-
 
 <div class="container">
     <div class="row">
-        <div class="col s12">
-            <h3 class="center-align">How Long is the Line?</h3>
-            <div class="row">
-                <form class="col s12">
-                  <form action="#">
-               <p>
-                 <input name="group1" type="radio" id="test1" />
-                 <label for="test1">Long</label>
-               </p>
-               <p>
-                 <input name="group1" type="radio" id="test2" />
-                 <label for="test2">Medium</label>
-               </p>
-               <p>
-                 <input name="group1" type="radio" id="test3" />
-                 <label for="test3">Yellow</label>
-               </p>
-
-             </form>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <div class="col m12">
-                            <p class="left-align">
-                                <button class="btn btn-large waves-effect waves-light" type="button" name="action">Login</button>
-                            </p>
-                        </div>
-                    </div>
-                </form>
+        <div class="col s12 center-align">
+            <h3>How Long is the Line?</h3>
+            <p class="flow-text">
+              Your votes help us keep up to date data.
+            </p>
+            <div class="row center-align">
+              <a id="shortLine" class="waves-effect waves-light btn">Short Line</a>
+              <a id="mediumLine" class="waves-effect waves-light btn">Medium Line</a>
+              <a id="longLine" class="waves-effect waves-light btn">Long Line</a>
             </div>
         </div>
     </div>
