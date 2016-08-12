@@ -6,7 +6,7 @@
     "url": "https://github.com/AndrewHeinke/LineUp.git"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "mocha --reporter spec --timeout 5000"
   },
   "dependencies": {

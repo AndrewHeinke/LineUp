@@ -2,15 +2,8 @@
 module.exports = function(app, passport) {
 	var q = require('q');
 	var models = require('./models');
-  app.get('/', function(req, res) {
-    models.Locations.findAll()
-      .then(function(data) {
-        var allLocations = {
-          locations: data
-        };
-        console.log(allLocations);
-        res.render('index', allLocations);
-      });
+	app.get('/', function(req, res) {
+    res.render('index');
   });
 
   app.post('/line/newvote', function(req, res) {
@@ -25,20 +18,21 @@ module.exports = function(app, passport) {
     //route to add party affiliation
   });
 
-  app.get('/location/:id/:length', function(req, res) {
+  app.get('/location/:id/:length/:geofence', function(req, res) {
     models.Locations.findAll({
       where: {
         id: req.params.id
       }
     })
     .then(function(data){
-      data[0].dataValues.line_length = req.params.length;
+      data[0].dataValues.line_length = parseInt(req.params.length);
+      data[0].dataValues.inGeofence = (req.params.geofence === 'true');
       var loc = {
         location: data[0].dataValues
-      }
+      };
       console.log(loc);
       res.render('indlocation', loc);
-    })
+    });
   });
 
   app.get('/locations', function(req, res) {
@@ -46,7 +40,7 @@ module.exports = function(app, passport) {
     models.Locations.findAll()
       .then(function(data) {
         var currTime = new Date();
-        currTime.setHours(currTime.getHours() - 6);
+        currTime.setHours(currTime.getHours() - 1);
         for (i = 0; i < data.length; i++) {
           locFinal.push(grabVotes(data[i].dataValues, currTime));
         }
@@ -78,8 +72,8 @@ module.exports = function(app, passport) {
   // new stuff from master is above this line
 
   // process the login form
-  app.post('/login', passport.authenticate('local-login', {
-      successRedirect: '/profile', // redirect to the secure profile section
+	app.post('/login', passport.authenticate('local-login', {
+      successRedirect: '/', // redirect to the secure profile section
       failureRedirect: '/login', // redirect back to the signup page if there is an error
       failureFlash: true // allow flash messages
     }),

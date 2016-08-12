@@ -4,7 +4,12 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
-var env       = process.env.NODE_ENV || 'development';
+var env       = process.env.NODE_ENV || 'production';
+if (process.argv[2]=== "env" && (process.argv[3] === "production" || process.argv[3] === "development" || process.argv[3] === "test")) {
+  env = process.argv[3];
+  console.log("env changed to --- "+process.argv[3] );
+}
+
 var config    = require(__dirname + '/../../config/config.json')[env];
 var db        = {};
 

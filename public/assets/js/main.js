@@ -1,13 +1,12 @@
-var mapObj = {};
 $(document).ready(function() {
-
+  var markersArray = [];
+  var map;
   var currentURL = window.location.origin;
   $.get(currentURL + "/locations", function(mapData){
-    mapObj = mapData;
-    var map;
+
     var bounds = new google.maps.LatLngBounds();
     //30.298063, -97.785785 middle of lake austin
-    var markersArray = [];
+
 
     // Display a map on the page
     map = new google.maps.Map(document.getElementById("map"));
