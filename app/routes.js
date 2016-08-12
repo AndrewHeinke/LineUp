@@ -18,14 +18,15 @@ module.exports = function(app, passport) {
     //route to add party affiliation
   });
 
-  app.get('/location/:id/:length', function(req, res) {
+  app.get('/location/:id/:length/:geofence', function(req, res) {
     models.Locations.findAll({
       where: {
         id: req.params.id
       }
     })
     .then(function(data){
-      data[0].dataValues.line_length = req.params.length;
+      data[0].dataValues.line_length = parseInt(req.params.length);
+      data[0].dataValues.inGeofence = (req.params.geofence === 'true');
       var loc = {
         location: data[0].dataValues
       };
@@ -39,7 +40,7 @@ module.exports = function(app, passport) {
     models.Locations.findAll()
       .then(function(data) {
         var currTime = new Date();
-        currTime.setHours(currTime.getHours() - 6);
+        currTime.setHours(currTime.getHours() - 1);
         for (i = 0; i < data.length; i++) {
           locFinal.push(grabVotes(data[i].dataValues, currTime));
         }
