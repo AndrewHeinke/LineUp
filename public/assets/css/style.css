@@ -73,53 +73,22 @@ footer.page-footer {
   padding-top: 0px;
 }
 
-/*footer map key*/
-
-
-/* basic positioning */
-
-.legend {
-  list-style: none;
+.mapLegend {
+  margin-bottom: 0px;
   color: #ffffff;
-  height: 15vh;
+  text-align: center;
 }
-.legend li {
-  float: left;
-  line-height: 20px;
-  font-size: 1.25em;
-  width: 25%;
+.shortLine {
+  background-color: green;
 }
-.legend span {
-  border: 1px solid #ccc;
-  float: left;
-  width: 15px;
-  height: 15px;
-  border-radius: 30px;
-  margin-right: 10px;
-  margin-top: 3px;
+.mediumLine {
+  background-color: #ffea00;
 }
-.legend .green {
-  background-color: #ff00ff;
+.longLine {
+  background-color: red;
 }
-.legend .yellow {
-  background-color: #00ffff;
-}
-.legend .red {
-  background-color: #0000ff;
-}
-
-.legend .blue {
-  background-color: #0000ff;
-}
-
-#longLine {
-  background: red;
-}
-#mediumLine {
-  background: yellow;
-}
-#shortLine {
-  background: green;
+.noData {
+  background-color: blue;
 }
 
 /*MEDIA QUERIES*/

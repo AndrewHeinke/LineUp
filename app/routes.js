@@ -6,16 +6,13 @@ module.exports = function(app, passport) {
     res.render('index');
   });
 
-  app.post('/line/newvote', function(req, res) {
-    models.LineVotes.create({
+  app.post('/location/:id/:length/:geofence', function(req, res) {
+		console.log(req.user);
+		models.LineVotes.create({
       line_length: req.body.line_length,
-      user_id: req.body.user_id,
-      location_id: req.body.location_id
+      user_id: req.user.dataValues.email,
+      location_id: req.params.id
     });
-  });
-
-  app.post('/party/create', function(req, res) {
-    //route to add party affiliation
   });
 
   app.get('/location/:id/:length/:geofence', function(req, res) {
@@ -25,12 +22,22 @@ module.exports = function(app, passport) {
       }
     })
     .then(function(data){
-      data[0].dataValues.line_length = parseInt(req.params.length);
+			if (req.params.length == "0") {
+				  data[0].dataValues.line_length = "Insufficient Data";
+			}
+			else if (req.params.length == "1") {
+				data[0].dataValues.line_length = "Short";
+			}
+			else if (req.params.length == "2") {
+				data[0].dataValues.line_length = "Medium";
+			}
+			else if (req.params.length == "3") {
+				data[0].dataValues.line_length = "Long";
+			}
       data[0].dataValues.inGeofence = (req.params.geofence === 'true');
       var loc = {
         location: data[0].dataValues
       };
-      console.log(loc);
       res.render('indlocation', loc);
     });
   });
@@ -73,8 +80,8 @@ module.exports = function(app, passport) {
 
   // process the login form
 	app.post('/login', passport.authenticate('local-login', {
-      successRedirect: '/', // redirect to the secure profile section
-      failureRedirect: '/login', // redirect back to the signup page if there is an error
+			successRedirect: 'back',
+			failureRedirect: '/', // redirect back to the homepage if there is an error
       failureFlash: true // allow flash messages
     }),
     function(req, res) {
@@ -84,13 +91,13 @@ module.exports = function(app, passport) {
       } else {
         req.session.cookie.expires = false;
       }
-      res.redirect('/');
+      res.redirect('back');
     });
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    failureRedirect: '/', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
   }));
 

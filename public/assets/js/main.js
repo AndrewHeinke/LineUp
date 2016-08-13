@@ -16,10 +16,6 @@ $(document).ready(function() {
     var curPos = {};
 
 
-
-
-
-
 //geo function
 var getGeoLocation =  function(map, callback){
       //geolocation//
@@ -59,7 +55,7 @@ var getGeoLocation =  function(map, callback){
     }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      console.log("handleLocationError has run")
+      console.log("handleLocationError has run");
       infoWindow.setPosition(pos);
       infoWindow.setContent(browserHasGeolocation ?
         'Error: The Geolocation service failed.' :
@@ -67,7 +63,7 @@ var getGeoLocation =  function(map, callback){
     }
     //end geolocation//
 //callback(map, curPos);
-}
+};
 //end geo function
 //marker function
 getGeoLocation(map, function(){
@@ -115,19 +111,19 @@ var fenceColor = "";
         //console.log("mapData["+i+"].line_length = "+mapData[i].line_length +" -- "+mapData[i].location_name)
         if( mapData[i].line_length === null ){
           //out of time frame line is blue
-          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
           fenceColor = "#0000FF";
         } else if(mapData[i].line_length < 2){
           //short line is green
-          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
           fenceColor = "#00FF00";
         } else if(mapData[i].line_length === 2){
           //medium line is yellow
-          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
           fenceColor = "#00FFFF";
         }else{
           //long line is red
-          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
           fenceColor = "#FF0000";
         }
       // Automatically center the map fitting all markers on the screen
@@ -177,8 +173,8 @@ var fenceColor = "";
           console.log("contentString = "+contentString)
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
-  console.log("asd")
-  console.log(thisFence.latLng)
+  console.log("asd");
+  console.log(thisFence.latLng);
  // thisFence.addListener('click', function() {
               infoWindow.open(map, thisFence);
             //});
@@ -190,7 +186,7 @@ var fenceColor = "";
             // marker.addListener('click', function() {
             //   infoWindow.open(map, marker);
             // });
-          }
+          };
         })(thisFence, i, resultContains));
 
 
@@ -239,4 +235,3 @@ var fenceColor = "";
 
    });
 });
-
