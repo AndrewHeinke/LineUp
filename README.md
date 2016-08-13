@@ -1,14 +1,14 @@
 #LineUp
-A web application that shows the length of lines at locations determined by user voting. LineUp allows users to give feedback on line length so we can update our data in real time with crowd sourced information.
+A web application that shows the length of lines at locations determined by user voting. LineUp allows users to give feedback on line length to update our data in real time with crowd sourced information.
 
 ![alt tag](screengrab.png)
 
 ## Installation
-npm install package.json
-create MySQL database
-run these commands in terminal:
-sequelize db:migrate
-sequelize db:seed:all
+npm install package.json <br/>
+create MySQL database <br/>
+run these commands in terminal: <br/>
+sequelize db:migrate <br/>
+sequelize db:seed:all <br/>
 Go to http://localhost:3333 to run locally
 
 ## Live Demo
