@@ -23,10 +23,16 @@ module.exports = {
         latitude: 30.362217,
         longitude: -97.736252
 
+      },
+    {
+        location_name: 'Norris',
+        latitude: 30.355086,
+        longitude: -97.733972
+
       }], {});
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Locations', null, {});
+    return queryInterface.bulkDelete('Locations', null, {truncate: true});
   }
 };

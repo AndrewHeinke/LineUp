@@ -84,12 +84,13 @@ $(document).ready(function() {
           //fill contentArray
           var currentContent = "";
           var lineLengthText = "";
+          console.log(typeof(mapData[i].line_length));
           currentContent = '<div class="info_content">' + '<p> You are currently at '+ markers[i].location_name + '</p>'
-          if (markers[i].line_length === 1) {
+          if (mapData[i].line_length === 1) {
             lineLengthText = "Currently the line is short.";
-          } else if (markers[i].line_length === 2) {
+          } else if (mapData[i].line_length === 2) {
             lineLengthText = "Currently the line is medium.";
-          } else if (markers[i].line_length === 3) {
+          } else if (mapData[i].line_length === 3) {
             lineLengthText = "Currently the line is Long.";
           } else {
             lineLengthText = "We apologize for the inconvenience, but there is insufficient data for the line length. "
