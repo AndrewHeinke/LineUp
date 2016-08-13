@@ -100,14 +100,14 @@ $(document).ready(function() {
           console.log("contentArray[i] = "+contentArray[i])
           //end fill contentArray
           // Allow each marker to be clickable to open info window
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-              infoWindow.setContent(contentArray[i]);
-              marker.addListener('click', function() {
-                infoWindow.open(map, marker);
-              });
-            }
-          })(marker, i));
+          // google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          //   return function() {
+          //     infoWindow.setContent(contentArray[i]);
+          //     marker.addListener('click', function() {
+          //       infoWindow.open(map, marker);
+          //     });
+          //   }
+          // })(marker, i));
           var fenceEdgeColor = "";
           var fenceFillColor = "";
           if( mapData[i].line_length === null ){
@@ -171,6 +171,15 @@ $(document).ready(function() {
             infoWindow.open(map, thisFence);
           };
         })(thisFence, i, resultContains));
+        var markerTemp = markersArray[i];
+        google.maps.event.addListener(markerTemp, 'click', (function(markerTemp, i) {
+            return function() {
+              infoWindow.setContent(contentArray[i]);
+              markersArray[i].addListener('click', function() {
+                infoWindow.open(map, markerTemp);
+              });
+            }
+          })(markerTemp, i));
       };
     });//end -- call getGeoLocation function with setmarkers as callback function
   }); // end $.get(currentURL
