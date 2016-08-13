@@ -8,7 +8,7 @@ $(document).ready(function() {
     $.post(currentURL, userData, function(response, status) {
       console.log(response);
     });
-    alert('Thank you for voting');
+    swal({title: "Thanks for voting!",   text: "Your feedback has been saved.",   type: "success", confirmButtonColor: "#9e9e9e",   confirmButtonText: "Close",   closeOnConfirm: true });
     return false;
   });
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
     $.post(currentURL, userData, function(response, status) {
       console.log(response);
     });
-    alert('Thank you for voting');
+    swal({title: "Thanks for voting!",   text: "Your feedback has been saved.",   type: "success", confirmButtonColor: "#9e9e9e",   confirmButtonText: "Close",   closeOnConfirm: true });
     return false;
   });
 
@@ -34,7 +34,7 @@ $(document).ready(function() {
     $.post(currentURL, userData, function(response, status) {
       console.log(response);
     });
-    alert('Thank you for voting');
+    swal({title: "Thanks for voting!",   text: "Your feedback has been saved.",   type: "success", confirmButtonColor: "#9e9e9e",   confirmButtonText: "Close",   closeOnConfirm: true });
     return false;
   });
 });
