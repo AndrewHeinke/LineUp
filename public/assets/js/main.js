@@ -162,7 +162,7 @@ $(document).ready(function() {
           lineData=0;
         };
         console.log("b4 contentArray[i] = "+contentArray[i] + "i +"+i);
-        contentArray[i] = contentArray[i]+' <p><a href="/location/'+mapData[i].id+'/' +lineData+'/'+resultContains+'"> Click here to add your line length data '+mapData[i].location_name+'</a></p>';
+        contentArray[i] = contentArray[i]+' <p><a href="/location/'+mapData[i].id+'/' +lineData+'/'+resultContains+'"> Click here to add your line length data for '+mapData[i].location_name+'</a></p>';
         console.log("after contentArray[i] = "+contentArray[i] + "i +"+i);
         google.maps.event.addListener(thisFence, 'click', (function(thisFence, i, resultContains) {
           return function(event) {
