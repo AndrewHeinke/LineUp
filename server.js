@@ -37,10 +37,13 @@ app.use(session({
  } )); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
+
+// login is passed to main.handlebars to determine log in/log out button rendering
 app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });
+
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================

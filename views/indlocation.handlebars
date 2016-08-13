@@ -4,7 +4,7 @@
      <div class="card-panel grey lighten-5 z-depth-1">
        <div class="row">
          <div class="col s12 m4">
-           <img src="http://lorempixel.com/output/technics-q-c-640-480-7.jpg" alt="" class="responsive-img">
+           <img src="{{location.image}}" alt="" class="responsive-img">
          </div>
          <div class="col s12 m8">
            <h3>{{location.location_name}}</h2>
@@ -20,16 +20,21 @@
 <div class="container">
     <div class="row">
         <div class="col s12 center-align">
-            <h3>How Long is the Line?</h3>
+            <h4>How Long is the Line?</h4>
             <p class="flow-text">
               Help us keep our data up to date by voting.
             </p>
+            {{#unless location.inGeofence}}
+              <p class="flow-text">
+                You may only vote when present in chosen location.
+              </p>
+            {{/unless}}
             {{#if login}}
             <div class="row center-align">
             <form>
-              <button id="shortLine" class="waves-effect waves-light btn" value="1">Short Line</button>
-              <button id="mediumLine" value="2" class="waves-effect waves-light btn">Medium Line</button>
-              <button id="longLine" value="3" class="waves-effect waves-light btn">Long Line</button>
+              <button id="shortLine" class="waves-effect waves-light btn btn-large" value="1">Short Line</button>
+              <button id="mediumLine" value="2" class="waves-effect waves-light btn btn-large">Medium Line</button>
+              <button id="longLine" value="3" class="waves-effect waves-light btn btn-large">Long Line</button>
             </form>
             </div>
             {{else}}
@@ -40,7 +45,5 @@
         </div>
     </div>
 </div>
-
-
 
 <script src="/assets/js/lineLength.js" type="text/javascript"></script>

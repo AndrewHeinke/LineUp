@@ -44,14 +44,14 @@ $(document).ready(function() {
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        console.log("handleLocationError has run")
+        console.log("handleLocationError has run");
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
           'Error: The Geolocation service failed.' :
           'Error: Your browser doesn\'t support geolocation.');
       }
 
-    } //end geolocation function
+    }; //end geolocation function
     //
     //call getGeoLocation function with setmarkers as callback function
     getGeoLocation(map, function(){
